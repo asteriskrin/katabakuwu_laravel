@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Player;
 
 class PlayerController extends Controller
@@ -27,6 +28,30 @@ class PlayerController extends Controller
 		else {
 			$response['code'] = 'AUTH_KEY_NOT_FOUND';
 		}
+
+		return response()->json($response);
+	}
+
+	/**
+	 * Register key.
+	 * 
+	 * @param  Request $request Request
+	 * @return json
+	 */
+	public function register_key(Request $request) {
+		$request->validate([
+			'name' => 'required|string|min:1|max:32',
+		]);
+
+		$player = Player::create([
+			'name' => $request->name,
+			'level' => 0,
+			'total_score' => 0,
+			'auth_key' => Str::random(32),
+		]);
+
+		$response = [];
+		$response['auth_key'] = $player->auth_key;
 
 		return response()->json($response);
 	}
