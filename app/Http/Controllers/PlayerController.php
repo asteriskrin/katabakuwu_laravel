@@ -65,4 +65,35 @@ class PlayerController extends Controller
 		$players = Player::orderBy('total_score', 'desc')->limit(10)->get();
 		return view('scoreboard', ['players' => $players]);
 	}
+
+	/**
+	 * Post scoreboard.
+	 *
+	 * @param Request $request Request
+	 * @return json
+	 */
+	public function scoreboard_post(Request $request) {
+		$request->validate([
+			'auth_key' => 'required|string|min:1|max:128',
+			'score' => 'required|numeric|min:1',
+		]);
+
+		$player = Player::where('auth_key', $request->auth_key)->first();
+
+		$response = [];
+
+		$response['code'] = 'NO_CODE';
+
+		if($player) {
+			$player->update([
+				'total_score' => $player->total_score + $request->score,
+			]);
+			$response['code'] = 'SUCCESS';
+		}
+		else {
+			$response['code'] = 'AUTH_KEY_NOT_FOUND';
+		}
+
+		return response()->json($response);
+	}
 }
