@@ -55,4 +55,14 @@ class PlayerController extends Controller
 
 		return response()->json($response);
 	}
+
+	/**
+	 * Get scoreboard.
+	 * 
+	 * @return view
+	 */
+	public function scoreboard_get() {
+		$players = Player::orderBy('total_score', 'desc')->limit(10)->get();
+		return view('scoreboard', ['players' => $players]);
+	}
 }
