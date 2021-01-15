@@ -76,6 +76,7 @@ class PlayerController extends Controller
 		$request->validate([
 			'auth_key' => 'required|string|min:1|max:128',
 			'score' => 'required|numeric|min:1',
+			'level' => 'required|numeric|min:1',
 		]);
 
 		$player = Player::where('auth_key', $request->auth_key)->first();
@@ -87,6 +88,7 @@ class PlayerController extends Controller
 		if($player) {
 			$player->update([
 				'total_score' => $player->total_score + $request->score,
+				'level' => $request->level,
 			]);
 			$response['code'] = 'SUCCESS';
 		}
