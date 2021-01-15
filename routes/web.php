@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Auth::routes();
 
@@ -22,3 +22,4 @@ Route::get('/api/validate/{key}', 'PlayerController@validate_key')->name('valida
 Route::get('/api/register', 'PlayerController@register_key')->name('register_key');
 Route::get('/api/scoreboard/get', 'PlayerController@scoreboard_get')->name('scoreboad_get');
 Route::get('/api/scoreboard/post', 'PlayerController@scoreboard_post')->name('scoreboad_post');
+Route::get('/scoreboard', 'ScoreboardController@showScoreboardPage')->name('scoreboard');

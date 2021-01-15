@@ -63,7 +63,7 @@ class PlayerController extends Controller
 	 */
 	public function scoreboard_get() {
 		$players = Player::orderBy('total_score', 'desc')->limit(10)->get();
-		return view('scoreboard', ['players' => $players]);
+		return view('api.scoreboard', ['players' => $players]);
 	}
 
 	/**
