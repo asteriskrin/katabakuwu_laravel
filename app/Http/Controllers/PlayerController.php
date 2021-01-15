@@ -45,7 +45,7 @@ class PlayerController extends Controller
 
 		$player = Player::create([
 			'name' => $request->name,
-			'level' => 0,
+			'level' => 1,
 			'total_score' => 0,
 			'auth_key' => Str::random(32),
 		]);
