@@ -18,6 +18,6 @@
 <div class="centerconntol">
     <img src="{{ asset('storage/img/logo.jpg') }}" class="centerconn img-fluid" width="200px"/>
     <h1 class="centerconn m-4" style="color: #0c6e43;">Katabakuwu</h1>
-    <a href="#" class="centerconn btn btn-primary" style="max-width: 200px;">Download Now!</a>
+    <a href="download/katabakuwu.zip" class="centerconn btn btn-primary" style="max-width: 200px;">Download Now!</a>
 </div>
 @endsection
